@@ -40,16 +40,15 @@ It is designed as a learning project for:
 
 
 log-analyzer/
-│
 ├── analyzer/
-│ ├── parser.py # Loads and parses log files
-│ ├── detector.py # Detects failed logins and suspicious IPs
-│ ├── report.py # Generates output report
+│   ├── parser.py        # Loads and parses log files
+│   ├── detector.py      # Detects failed logins and suspicious IPs
+│   └── report.py        # Generates security report
 │
 ├── logs/
-│ └── sample.log # Sample SSH log data for testing
+│   └── sample.log       # Sample SSH log data for testing
 │
-├── main.py # Entry point of the application
+├── main.py              # Entry point of the application
 ├── README.md
 └── .gitignore
 
