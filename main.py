@@ -1,16 +1,13 @@
-import re
-from collections import Counter
+from analyzer.parser import load_logs
+from analyzer.detector import get_failed_ips, detect_bruteforce
+from analyzer.report import print_report
 
-failed_ips = []
+# Load logs
+logs = load_logs("logs/sample.log")
 
-with open("logs/sample.log", "r") as f:
-    for line in f:
-        if "Failed password" in line:
-            ip = re.search(r'from (\d+\.\d+\.\d+\.\d+)', line)
-            if ip:
-                failed_ips.append(ip.group(1))
+# Analyze
+ip_counts = get_failed_ips(logs)
+suspicious_ips = detect_bruteforce(ip_counts, threshold=3)
 
-ip_counts = Counter(failed_ips)
-
-for ip, count in ip_counts.items():
-    print(f"{ip} → {count} failed attempts")
+# Report
+print_report(ip_counts, suspicious_ips)
